@@ -1,13 +1,19 @@
+import json
 import os
 import pandas as pd
 from langdetect import detect_langs
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from textblob import TextBlob
-import string
+import nltk
 import spacy
 import re
 
+nltk.download('stopwords')
+
+def read_json(filename: str):
+    with open(filename, 'r') as f:
+        return json.load(f)
 
 
 class TextPreprocessor:
@@ -69,4 +75,4 @@ class TextPreprocessor:
     
     @staticmethod
     def remove_punctuation(text: str)-> str: 
-        return re.sub(r'[^a-zA-Z]', ' ', text)
+        return re.sub(r'[^a-zA-ZÀ-ÿ]', ' ', text)
